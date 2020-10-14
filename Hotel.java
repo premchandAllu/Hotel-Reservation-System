@@ -2,10 +2,11 @@ package com.blz.HotelReservationSystem;
 
 public class Hotel {
 
-	public String hotelName;
-	public int rateForWeekdaysRegularCustomer;
-	public int rateForWeekendsRegularCustomer;
-	public long totalRate;
+	private String hotelName;
+	private int rateForWeekdaysRegularCustomer;
+	private int rateForWeekendsRegularCustomer;
+	private int rating;
+	private long totalRate;
 	
 	public long getTotalRate() {
 		return totalRate;
@@ -15,10 +16,19 @@ public class Hotel {
 		this.totalRate = totalRate2;
 	}
 
-	public Hotel(String hotelName,int rateForWeekdaysRegularCustomer,int rateForWeekendsRegularCustomer) {
+	public Hotel(String hotelName,int rateForWeekdaysRegularCustomer,int rateForWeekendsRegularCustomer,int rating) {
 		this.hotelName=hotelName;
 		this.rateForWeekdaysRegularCustomer=rateForWeekdaysRegularCustomer;
 		this.rateForWeekendsRegularCustomer=rateForWeekendsRegularCustomer;
+		this.rating=rating;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public void setHotelName(String hotelName) {
