@@ -6,6 +6,19 @@ public class Hotel {
 	private int rateForWeekdaysRegularCustomer;
 	private int rateForWeekendsRegularCustomer;
 	private int rateForWeekdaysRewardsCustomer;
+	private int rateForWeekendsRewardsCustomer;
+	private int rating;
+	private long totalRate;
+
+	public Hotel(String hotelName, int rateForWeekdaysRegularCustomer, int rateForWeekendsRegularCustomer, int rating,
+			int rateForWeekdaysRewardsCustomer, int rateForWeekendsRewardsCustomer) {
+		this.hotelName = hotelName;
+		this.rateForWeekdaysRegularCustomer = rateForWeekdaysRegularCustomer;
+		this.rateForWeekendsRegularCustomer = rateForWeekendsRegularCustomer;
+		this.rateForWeekdaysRewardsCustomer = rateForWeekdaysRewardsCustomer;
+		this.rateForWeekendsRewardsCustomer = rateForWeekendsRewardsCustomer;
+		this.rating = rating;
+	}
 
 	public int getRateForWeekdaysRewardsCustomer() {
 		return rateForWeekdaysRewardsCustomer;
@@ -23,23 +36,12 @@ public class Hotel {
 		this.rateForWeekendsRewardsCustomer = rateForWeekendsRewardsCustomer;
 	}
 
-	private int rateForWeekendsRewardsCustomer;
-	private int rating;
-	private long totalRate;
-
 	public long getTotalRate() {
 		return totalRate;
 	}
 
 	public void setTotalRate(long totalRate2) {
 		this.totalRate = totalRate2;
-	}
-
-	public Hotel(String hotelName, int rateForWeekdaysRegularCustomer, int rateForWeekendsRegularCustomer, int rating) {
-		this.hotelName = hotelName;
-		this.rateForWeekdaysRegularCustomer = rateForWeekdaysRegularCustomer;
-		this.rateForWeekendsRegularCustomer = rateForWeekendsRegularCustomer;
-		this.rating = rating;
 	}
 
 	public int getRating() {
@@ -73,5 +75,4 @@ public class Hotel {
 	public void setRateForWeekendsRegularCustomer(int rateForWeekendsRegularCustomer) {
 		this.rateForWeekendsRegularCustomer = rateForWeekendsRegularCustomer;
 	}
-
 }
