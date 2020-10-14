@@ -15,7 +15,7 @@ public class HotelReservation {
 		return true;
 	}
 	
-	public Hotel cheapestBestRatedHotel(String start,String end) {
+	public Hotel bestRatedHotel(String start,String end) {
 		Date StartDate=null;
 		Date EndDate=null;
 		 try {
@@ -48,19 +48,19 @@ public class HotelReservation {
 	        	long totalRate = weekdays*hotel.getRateForWeekdaysRegularCustomer()+weekends*hotel.getRateForWeekendsRegularCustomer();
 	        	hotel.setTotalRate(totalRate);
 	        }
-		 List<Hotel> bestRatedHotelList = hotelList.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).collect(Collectors.toList());
+		 List<Hotel> bestRatedHotelList = hotelList.stream().sorted(Comparator.comparing(Hotel::getRating).reversed()).collect(Collectors.toList());
 	        
-	      Hotel cheapestHotel = bestRatedHotelList.get(0);
-	      long cheapestRate= bestRatedHotelList.get(0).getTotalRate();
+	      Hotel bestRatedHotel = bestRatedHotelList.get(0);
+	      int bestHotelRating= bestRatedHotelList.get(0).getRating();
 	       for(Hotel hotel:bestRatedHotelList) {
-	        	if(hotel.getTotalRate()<=cheapestRate) {
-	        		if(hotel.getRating()>cheapestHotel.getRating())
-	        			cheapestHotel = hotel;
+	    	   if(hotel.getRating()>=bestHotelRating) {
+	        		if(hotel.getTotalRate()<bestRatedHotel.getTotalRate())
+	        			bestRatedHotel = hotel;
 	        	}
 	        	else 
 	        		break;
 	        }
-		 return cheapestHotel; 
+		 return bestRatedHotel; 
 	}
 
 	public static void main(String[] args) {
@@ -75,8 +75,8 @@ public class HotelReservation {
         String start=sc.next();
         System.out.println("Enter the end date in ddMMMYYYY format");
         String end=sc.next();
-        Hotel cheapHotel=hotelReservation.cheapestBestRatedHotel(start, end);
-        System.out.println(cheapHotel.getHotelName()+"'s has rating of "+cheapHotel.getRating()+" and total rate is "+cheapHotel.getTotalRate());
+        Hotel bestHotel=hotelReservation.bestRatedHotel(start, end);
+        System.out.println(bestHotel.getHotelName()+"'s has rating of "+bestHotel.getRating()+" and total rate is "+bestHotel.getTotalRate());
 	}
 
 }
