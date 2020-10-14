@@ -1,6 +1,7 @@
 package com.blz.HotelReservationSystem;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -14,7 +15,7 @@ public class HotelReservation {
 		return true;
 	}
 	
-	public Hotel cheapestHotel(String start,String end) {
+	public Hotel cheapestBestRatedHotel(String start,String end) {
 		Date StartDate=null;
 		Date EndDate=null;
 		 try {
@@ -47,7 +48,18 @@ public class HotelReservation {
 	        	long totalRate = weekdays*hotel.getRateForWeekdaysRegularCustomer()+weekends*hotel.getRateForWeekendsRegularCustomer();
 	        	hotel.setTotalRate(totalRate);
 	        }
-		 Hotel cheapestHotel = hotelList.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).findFirst().orElse(null);
+		 List<Hotel> bestRatedHotelList = hotelList.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).collect(Collectors.toList());
+	        
+	      Hotel cheapestHotel = bestRatedHotelList.get(0);
+	      long cheapestRate= bestRatedHotelList.get(0).getTotalRate();
+	       for(Hotel hotel:bestRatedHotelList) {
+	        	if(hotel.getTotalRate()<=cheapestRate) {
+	        		if(hotel.getRating()>cheapestHotel.getRating())
+	        			cheapestHotel = hotel;
+	        	}
+	        	else 
+	        		break;
+	        }
 		 return cheapestHotel; 
 	}
 
@@ -59,21 +71,12 @@ public class HotelReservation {
         hotelReservation.addHotel("Lakewood",110,90,3);
         hotelReservation.addHotel("Bridgewood",150,50,4);
         hotelReservation.addHotel("Ridgewood",220,150,5);
-        System.out.println("Enter the hotel Name of your choice");
-        String hotelName=sc.next();
-        System.out.println("Enter the rate for Weekdays for regular customer");
-        int rateWeekdays=sc.nextInt();
-        System.out.println("Enter the rate for Weekends for regular customer");
-        int rateWeekends=sc.nextInt();
-        System.out.println("Enter the ratings for hotel");
-        int rating=sc.nextInt();
-        hotelReservation.addHotel(hotelName, rateWeekdays,rateWeekends,rating);
         System.out.println("Enter the start date in ddMMMYYYY format");
         String start=sc.next();
         System.out.println("Enter the end date in ddMMMYYYY format");
         String end=sc.next();
-        Hotel cheapHotel=hotelReservation.cheapestHotel(start, end);
-        System.out.println(cheapHotel.getHotelName()+"'s total rate is "+cheapHotel.getTotalRate());
+        Hotel cheapHotel=hotelReservation.cheapestBestRatedHotel(start, end);
+        System.out.println(cheapHotel.getHotelName()+"'s has rating of "+cheapHotel.getRating()+" and total rate is "+cheapHotel.getTotalRate());
 	}
 
 }
