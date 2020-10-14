@@ -3,7 +3,8 @@ package com.blz.HotelReservationSystem;
 public class Hotel {
 
 	public String hotelName;
-	public int rateForRegularCustomer;
+	public int rateForWeekdaysRegularCustomer;
+	public int rateForWeekendsRegularCustomer;
 	public long totalRate;
 	
 	public long getTotalRate() {
@@ -14,9 +15,10 @@ public class Hotel {
 		this.totalRate = totalRate2;
 	}
 
-	public Hotel(String hotelName,int rateForRegularCustomer) {
+	public Hotel(String hotelName,int rateForWeekdaysRegularCustomer,int rateForWeekendsRegularCustomer) {
 		this.hotelName=hotelName;
-		this.rateForRegularCustomer=rateForRegularCustomer;
+		this.rateForWeekdaysRegularCustomer=rateForWeekdaysRegularCustomer;
+		this.rateForWeekendsRegularCustomer=rateForWeekendsRegularCustomer;
 	}
 
 	public void setHotelName(String hotelName) {
@@ -27,11 +29,21 @@ public class Hotel {
 		return hotelName;
 	}
 
-	public void setRateForRegularCustomer(int rateForRegularCustomer) {
-		this.rateForRegularCustomer = rateForRegularCustomer;
+	public int getRateForWeekdaysRegularCustomer() {
+		return rateForWeekdaysRegularCustomer;
 	}
 
-	public int getRateForRegularCustomer() {
-		return rateForRegularCustomer;
+	public void setRateForWeekdaysRegularCustomer(int rateForWeekdaysRegularCustomer) {
+		this.rateForWeekdaysRegularCustomer = rateForWeekdaysRegularCustomer;
 	}
+
+	public int getRateForWeekendsRegularCustomer() {
+		return rateForWeekendsRegularCustomer;
+	}
+
+	public void setRateForWeekendsRegularCustomer(int rateForWeekendsRegularCustomer) {
+		this.rateForWeekendsRegularCustomer = rateForWeekendsRegularCustomer;
+	}
+
+	
 }
